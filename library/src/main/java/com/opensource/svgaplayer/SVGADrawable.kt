@@ -7,12 +7,11 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.opensource.svgaplayer.drawer.SVGACanvasDrawer
 
-class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicEntity, internal var scaleType:ImageView.ScaleType = ImageView.ScaleType.MATRIX): Drawable() {
-
-    constructor(videoItem: SVGAVideoEntity): this(videoItem, SVGADynamicEntity())
+class SVGADrawable @JvmOverloads constructor(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicEntity = SVGADynamicEntity(),
+                                             internal var scaleType: ImageView.ScaleType = ImageView.ScaleType.MATRIX) : Drawable() {
 
     var cleared = true
-        internal set (value) {
+        internal set(value) {
             if (field == value) {
                 return
             }
@@ -21,7 +20,7 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
         }
 
     var currentFrame = 0
-        internal set (value) {
+        internal set(value) {
             if (field == value) {
                 return
             }
@@ -36,11 +35,11 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
             return
         }
         canvas?.let {
-            drawer.drawFrame(it,currentFrame, scaleType)
+            drawer.drawFrame(it, currentFrame, scaleType)
         }
     }
 
-    override fun setAlpha(alpha: Int) { }
+    override fun setAlpha(alpha: Int) {}
 
     override fun getOpacity(): Int {
         return PixelFormat.TRANSPARENT

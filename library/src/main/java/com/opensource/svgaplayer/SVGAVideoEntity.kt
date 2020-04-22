@@ -25,7 +25,7 @@ class SVGAVideoEntity {
     protected fun finalize() {
         this.soundPool?.release()
         this.soundPool = null
-        this.images.clear()
+        this.images?.clear()
     }
 
     var antiAlias = true
